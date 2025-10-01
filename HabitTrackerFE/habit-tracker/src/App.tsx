@@ -1,24 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import AddHabitForm from './components/AddHabitForm';
+import HabitList from './components/HabitList';
+import { Habit } from './types';
 
 function App() {
+  const [habits, setHabits] = useState<Habit[]>([]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learning React
-        </a>
-      </header>
+    <div style={{padding:'1rem'}}>
+      <h1>Habit Tracker</h1>
+      <AddHabitForm onAdd={(h)=> setHabits(prev => [h, ...prev])}/>
+      <HabitList habits={habits} setHabits={setHabits}/>
     </div>
   );
 }
